@@ -1,26 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Loan Prediction</title>
-    <h1>Loan Prediction, Will It Be Approved Or Rejected?</h1>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <link rel="stylesheet" href="C:\Users\Anisa Agustina\webapp/client/app.css" type="text/css" media="screen">
+    <title>Loan Prediction Form</title>
+    <h1 style="color:black;text-align:center;">Loan Prediction Form</h1>
+    <h2 style="color:black;text-align:center;">Predicted Using Logistic Regression</h2>
+    <link rel="stylesheet" href= "../client/app.css" type="text/css" media="screen">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+    <div class="textbox">
+        <br>
+        <h1 style="color:darkblue;text-align:center;"> {{ prediction_text }}</h1>
+    </div>
 <style>
 body {
-	background-color: #d19999;
+	background-image: url('../client/loan-personal.jpg');
 }
 </style>
-    <div class = "testbox">
+<style>
+form {
+    background-color: #f7eccd;
+    border: 2px solid powderblue;
+    text-align:center;
+    width: 540px;
+    position: absolute;
+    right: 50%;
+    left: 36%;
+    margin: 0 -70px 0 -70px;
+}
+</style>
+    <div class = "form">
     	<form action="/predict_loan" method="POST"> 
         	<div class="banner">
-            	<h2>Predict Your Loan Acceptance Here</h2>
+            	<h2>Applicant's Information</h2>
             </div>
             <div class="question">
-            	<p>Please Input Your Gender</p>
+            	<p>Gender</p>
             	<div class="question-answer">
                 	<input type="radio" id="radio-gender-1" name="uiGender" value="Female" required/>
                 	<label for="radio-gender-1">Female</label>
@@ -30,17 +45,17 @@ body {
             </div>
             
             <div class="question">
-            	<p>Are You Married?</p>
+            	<p>Marital Status</p>
             	<div class="question-answer">
                 	<input type="radio" id="radio-married-1" name="uiMarried" value="Yes" required/>
-                	<label for="radio-married-1">Yes</label>
+                	<label for="radio-married-1">Married</label>
                 	<input type="radio" id="radio-married-2" name="uiMarried" value="No" required checked/>
-                	<label for="radio-married-2">No</label>
+                	<label for="radio-married-2">Single</label>
                 </div>
             </div>
             
             <div class="question>">
-            	<p>Please Input Your Dependents</p>
+            	<p>Dependents</p>
             	<div class="question-answer">
                 	<input type="radio" id="radio-dependents-1" name="uiDependents" value=0 required/>
                 	<label for="radio-dependents-1">0</label>
@@ -54,47 +69,47 @@ body {
             </div>
             
             <div class="question>">
-            	<p>Please Input Your Education</p>
+            	<p>Education (Bachelor Degree)</p>
             	<div class="question-answer">
                 	<input type="radio" id="radio-education-1" name="uiEducation" value="Graduate" required/>
-                	<label for="radio-education-1">Graduate</label>
+                	<label for="radio-education-1">Graduated</label>
                 	<input type="radio" id="radio-education-2" name="uiEducation" value="Not Graduate" required checked/>
-                	<label for="radio-education-2">Not Graduate</label>
+                	<label for="radio-education-2">Not Graduated</label>
                 </div>
             </div>
             
             <div class="question>">
-            	<p>Are You Self-Employed?</p>
+            	<p>Working</p>
             	<div class="question-answer">
                 	<input type="radio" id="radio-employed-1" name="uiEmployed" value="Yes" required/>
-                	<label for="radio-employed-1">Yes</label>
+                	<label for="radio-employed-1">Self-Employed</label>
                 	<input type="radio" id="radio-employed-2" name="uiEmployed" value="No" required checked/>
-                	<label for="radio-employed-2">No</label>
+                	<label for="radio-employed-2">Other</label>
             	</div>
             </div>
 
             <div class="question>">
-            	<label for="income1">How Much Is Applicant Income?</label>
+            	<label for="income1">The Applicant's Income</label>
               	<input type="number" id="income1" name="income1" required value=1000>
             </div>
 
             <div class="question>">
-            	<label for="income2">How Much Is Co-Applicant Income?</label>
+            	<label for="income2">The Co-Applicant's Income</label>
               	<input type="number" id="income2" name="income2" required value=1000>
             </div>
 
             <div class="question>">
-              	<label for="loanamount">How Much Is Applicant Loan?</label>
+              	<label for="loanamount">The Requested Loan Amount</label>
               	<input type="number" id="loanamount" name="loanamount" required value=750>
             </div>
 
             <div class="question>">
-              	<label for="loanterm">How Long Is The Loan Term?</label>
+              	<label for="loanterm">The Loan Term (Days)</label>
               	<input type="number" id="loanterm" name="loanterm" required value=360>
             </div>
 
             <div class="question>">
-              	<p>Please Input Your Credit History</p>
+              	<p>The Applicant's Record For Responsible Repayment Debts</p>
               	<div class="question-answer">
                 	<input type="radio" id="radio-history-1" name="uiHistory" value=1 required/>
                 	<label for="radio-history-1">Has All Debts Paid</label>
@@ -104,7 +119,7 @@ body {
             </div>
             
             <div class="question>">
-            	<p>Please Input Your Property Area</p>
+            	<p>Property Area</p>
             	<div class="question-answer">
                 	<input type="radio" id="radio-property-1" name="uiProperty" value="Rural" required/>
                 	<label for="radio-property-1">Rural</label>
@@ -114,15 +129,9 @@ body {
                 	<label for="radio-property-3">Urban</label>
             	</div>
             </div>
-            <div class="btn-block">
-            	<button type="submit" href="/">Predict Your Loan</button>
+            <div>
+            	<button class="submit" type="submit" style="color:white;text-align:center;" href="/">Predict Loan Acceptance</button>
             </div>
-        </form>
-    </div>
-    <div class="textbox">
-        <form>
-            <br>
-            <h1 style="color:blue;text-align:center;"> {{ prediction_text }}</h1>
         </form>
     </div>
 </body>
